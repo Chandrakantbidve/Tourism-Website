@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations | Tourism Website</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        h1 {
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        .destination-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            background: #fff;
+            color: #333;
+        }
+        .destination-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .destination-card .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+        .destination-card h5 {
+            font-weight: bold;
+        }
+        .destination-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .btn-primary {
+            background-color: #667eea;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Explore Destinations in India</h1>
+        <div class="row g-4">
+            {% for state in [
+                'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa',
+                'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala',
+                'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland',
+                'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana',
+                'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
+            ] %}
+            <div class="col-md-4">
+                <div class="card destination-card">
+                    <img src="{{ url_for('static', filename='images/destinations/' + state + '.jpg') }}" alt="{{ state }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ state }}</h5>
+                        <p class="card-text">Experience the beauty and culture of {{ state }}.</p>
+                        <a href="#" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

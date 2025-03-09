@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Tourism Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signup-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        async function handleSignup(event) {
+    event.preventDefault(); // Prevent form from refreshing the page
+
+    const formData = new FormData(event.target);
+
+    try {
+        const response = await fetch('/register', { // Corrected URL
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            alert("Account created successfully!");
+            window.location.href = "/"; // Redirect to home page (index.html is served via Flask)
+        } else {
+            const errorMessage = await response.text();
+            alert("Signup failed: " + errorMessage);
+        }
+    } catch (error) {
+        console.error("Error during signup:", error);
+        alert("An error occurred. Please try again.");
+    }
+}
+
+    </script>
+</head>
+
+<body>
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+        <form onsubmit="handleSignup(event)">
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="input-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+        
+        <p class="login-link">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+    </div>
+</body>
+
+</html>
